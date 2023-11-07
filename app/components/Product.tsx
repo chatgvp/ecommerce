@@ -2,6 +2,7 @@ import { Paper, Group, Rating, Text, Image } from "@mantine/core"
 import Link from "next/link"
 import React from "react"
 import classes from "../styles/card.module.css"
+import { useRouter } from "next/navigation"
 interface ProductProps {
     id: number
     name: string
@@ -9,6 +10,7 @@ interface ProductProps {
     image: string
     rating: number
 }
+const router = useRouter()
 
 const Product: React.FC<ProductProps> = ({
     id,
@@ -22,8 +24,10 @@ const Product: React.FC<ProductProps> = ({
             withBorder
             radius="md"
             className={classes.card}
-            component={Link}
-            href={`/about/${id}`}>
+            // component={Link}
+            // onClick={router.push('about/'id)}
+            // href={`/about/${id}`}
+        >
             <Text size="xl" fw={700} mt="md" c="dark">
                 {name}
             </Text>

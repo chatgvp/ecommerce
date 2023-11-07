@@ -18,9 +18,12 @@ import image0 from "../../public/shoes/0.png"
 import { useMediaQuery } from "@mantine/hooks"
 import { Si1Password } from "react-icons/si"
 import { BsCheckCircle, BsCheckLg } from "react-icons/bs"
+import Link from "next/link"
+import { useRouter } from "next/navigation"
 
 function UpperBodyComponent() {
     const matches = useMediaQuery("(min-width: 56.25em)")
+    const router = useRouter()
     return (
         <div className={classes.inner}>
             <div className={classes.content}>

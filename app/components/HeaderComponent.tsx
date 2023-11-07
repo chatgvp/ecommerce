@@ -77,8 +77,9 @@ export default function HeaderComponents() {
                 <NavLink
                     label={link.label}
                     leftSection={link.icon}
-                    href={link.link}
-                    component={Link}
+                    onClick={() => {
+                        router.push(link.link)
+                    }}
                 />
             </Flex>
         )
