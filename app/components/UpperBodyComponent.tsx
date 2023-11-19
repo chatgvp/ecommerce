@@ -29,8 +29,9 @@ function UpperBodyComponent() {
             <div className={classes.content}>
                 <Title className={classes.title}>
                     Discover <span className={classes.highlight}>shoes </span>
-                    online with a premier shoe sanctuary's digital debut.
+                    online with a premier shoe sanctuary&apos;s digital debut.
                 </Title>
+
                 <Text c="dimmed" mt="md">
                     Step into a world where every pair is crafted with a perfect
                     blend of comfort and style, transforming your daily stride
