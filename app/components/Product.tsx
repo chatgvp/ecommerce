@@ -10,7 +10,6 @@ interface ProductProps {
     image: string
     rating: number
 }
-const router = useRouter()
 
 const Product: React.FC<ProductProps> = ({
     id,
@@ -19,19 +18,29 @@ const Product: React.FC<ProductProps> = ({
     image,
     rating,
 }) => {
+    const product = {
+        id: id,
+        name: name,
+        price: price,
+        image: image,
+        rating: rating,
+    }
     return (
         <Paper
             withBorder
             radius="md"
             className={classes.card}
-            // component={Link}
-            // onClick={router.push('about/'id)}
-            // href={`/about/${id}`}
-        >
+            component={Link}
+            href={{
+                pathname: "/product/view",
+                query: {
+                    product: JSON.stringify(product),
+                },
+            }}>
             <Text size="xl" fw={700} mt="md" c="dark">
                 {name}
             </Text>
-            <Image src={image} className={image} />
+            <Image src={image} className={image} alt={"image"} />
             <Text size="sm" mt="sm" c="dimmed">
                 {"₱ "}
                 {price}

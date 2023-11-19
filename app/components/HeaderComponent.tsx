@@ -23,6 +23,7 @@ import { SiHomeadvisor } from "react-icons/si"
 import { AiOutlineShoppingCart } from "react-icons/ai"
 import { BsChevronDown } from "react-icons/bs"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { useRouter } from "next/navigation"
 
 const links = [
@@ -48,7 +49,11 @@ export default function HeaderComponents() {
     const [active, setActive] = useState(links[0].link)
     const items = links.map((link) => {
         const menuItems = link.links?.map((item) => (
-            <NavLink label={item.label} leftSection={link.icon} />
+            <NavLink
+                key={item.label}
+                label={item.label}
+                leftSection={link.icon}
+            />
         ))
         if (menuItems) {
             return (
@@ -75,6 +80,7 @@ export default function HeaderComponents() {
         return (
             <Flex direction="row" wrap="wrap">
                 <NavLink
+                    key={link.label}
                     label={link.label}
                     leftSection={link.icon}
                     onClick={() => {

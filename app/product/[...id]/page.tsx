@@ -1,36 +1,21 @@
 "use client"
-import {
-    Button,
-    Container,
-    Flex,
-    Group,
-    List,
-    ThemeIcon,
-    Title,
-    rem,
-    Text,
-    Image,
-} from "@mantine/core"
-import image from "next/image"
-import React from "react"
-import classes from "../styles/page.module.css"
-import image0 from "../../public/shoes/0.png"
-import { useMediaQuery } from "@mantine/hooks"
-import { Si1Password } from "react-icons/si"
-import { BsCheckCircle, BsCheckLg } from "react-icons/bs"
-import Link from "next/link"
-import { useRouter } from "next/navigation"
 
-function UpperBodyComponent() {
-    const matches = useMediaQuery("(min-width: 56.25em)")
-    const router = useRouter()
+import { useSearchParams } from "next/navigation" // Change from "next/navigation"
+import classes from "../../styles/page.module.css"
+import { Title, List, ThemeIcon, rem, Button, Text, Image } from "@mantine/core"
+import { BsCheckLg } from "react-icons/bs"
+
+export default function SearchBar() {
+    const searchParams = useSearchParams()
+
+    const product = searchParams.get("product")
+    const results = product ? JSON.parse(product) : null
     return (
         <div className={classes.inner}>
+            <Image src={results.image} className={classes.image} alt="image" />
+            {/* <div>{results.image}</div> */}
             <div className={classes.content}>
-                <Title className={classes.title}>
-                    Discover <span className={classes.highlight}>shoes </span>
-                    online with a premier shoe sanctuary's digital debut.
-                </Title>
+                <Title className={classes.title}>{results.name}</Title>
                 <Text c="dimmed" mt="md">
                     Step into a world where every pair is crafted with a perfect
                     blend of comfort and style, transforming your daily stride
@@ -69,11 +54,6 @@ function UpperBodyComponent() {
                     Get started
                 </Button>
             </div>
-            {matches ? (
-                <Image src={image0.src} className={classes.image} alt="image" />
-            ) : null}
         </div>
     )
 }
-
-export default UpperBodyComponent
