@@ -78,9 +78,8 @@ export default function HeaderComponents() {
             )
         }
         return (
-            <Flex direction="row" wrap="wrap">
+            <Flex direction="row" wrap="wrap" key={link.label}>
                 <NavLink
-                    key={link.label}
                     label={link.label}
                     leftSection={link.icon}
                     onClick={() => {
