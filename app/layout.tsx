@@ -11,6 +11,7 @@ import {
     Container,
 } from "@mantine/core"
 // import Header from "./header/page"
+import "@mantine/notifications/styles.css"
 import HeaderComponent from "./components/HeaderComponent"
 
 // const inter = Inter({ subsets: ["latin"] })

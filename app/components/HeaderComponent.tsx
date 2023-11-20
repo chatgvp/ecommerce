@@ -16,6 +16,8 @@ import {
     Skeleton,
     rem,
     UnstyledButton,
+    Indicator,
+    Drawer,
 } from "@mantine/core"
 import { MantineLogo } from "@mantine/ds"
 import { useState } from "react"
@@ -40,13 +42,20 @@ const links = [
         ],
     },
     { link: "/about", label: "About Us", icon: <AiOutlineShoppingCart /> },
-    { link: "/cart", label: "Cart", icon: <AiOutlineShoppingCart /> },
+    {
+        link: "/cart",
+        label: "Cart",
+        icon: <AiOutlineShoppingCart />,
+        indicator: true,
+    },
 ]
+const cart = 1
 
 export default function HeaderComponents() {
     const router = useRouter()
     const [opened, { toggle }] = useDisclosure()
-    const [active, setActive] = useState(links[0].link)
+    const [openedCart, { open, close }] = useDisclosure(false)
+    // const [active, setActive] = useState(links[0].link)
     const items = links.map((link) => {
         const menuItems = link.links?.map((item) => (
             <NavLink
@@ -55,6 +64,29 @@ export default function HeaderComponents() {
                 leftSection={link.icon}
             />
         ))
+        if (link.label === "Cart" && link.indicator) {
+            return (
+                <Flex direction="row" wrap="wrap" key={link.label}>
+                    <NavLink
+                        key={link.label}
+                        label={link.label}
+                        leftSection={
+                            <>
+                                <Indicator
+                                    inline
+                                    size={16}
+                                    withBorder
+                                    color="red"
+                                    label="1">
+                                    {link.icon}
+                                </Indicator>
+                            </>
+                        }
+                        onClick={open}
+                    />
+                </Flex>
+            )
+        }
         if (menuItems) {
             return (
                 <Menu
@@ -89,6 +121,7 @@ export default function HeaderComponents() {
             </Flex>
         )
     })
+
     return (
         <Group h="100%" py="md">
             <Group justify="space-between" style={{ flex: 1 }}>
@@ -97,12 +130,20 @@ export default function HeaderComponents() {
                     {items}
                 </Group>
                 <Burger
-                    opened={opened}
+                    opened={openedCart}
                     onClick={toggle}
                     hiddenFrom="sm"
                     size="sm"
                 />
             </Group>
+            <Drawer
+                opened={openedCart}
+                onClose={close}
+                size="sm"
+                withCloseButton={true}
+                position="right">
+                Drawer without header, press escape or click on overlay to close
+            </Drawer>
         </Group>
     )
 }

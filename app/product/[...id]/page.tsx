@@ -1,57 +1,77 @@
 "use client"
 
-import { useSearchParams } from "next/navigation" // Change from "next/navigation"
-import classes from "../../styles/page.module.css"
-import { Title, List, ThemeIcon, rem, Button, Text, Image } from "@mantine/core"
-import { BsCheckLg } from "react-icons/bs"
-
+import { useSearchParams, useRouter } from "next/navigation"
+// import classes from "../../styles/page.module.css"
+import classes from "@/app/styles/page.module.css"
+import {
+    Title,
+    List,
+    ThemeIcon,
+    rem,
+    Button,
+    Text,
+    Image,
+    Anchor,
+    SegmentedControl,
+    Group,
+    Input,
+} from "@mantine/core"
+import { useCounter } from "@mantine/hooks"
+import { BsArrowLeft } from "react-icons/bs"
+import { notifications } from "@mantine/notifications"
 export default function SearchBar() {
     const searchParams = useSearchParams()
-
+    const router = useRouter()
     const product = searchParams.get("product")
     const results = product ? JSON.parse(product) : null
+    const sizedata =
+        results?.sizes.map((size: any) => ({
+            label: size,
+            value: String(size),
+        })) || []
+    const [count, handlers] = useCounter(0, { min: 0, max: 10 })
+
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const newValue = parseInt(event.target.value, 10) || 0
+        handlers.set(newValue)
+    }
+
     return (
         <div className={classes.inner}>
             <Image src={results.image} className={classes.image} alt="image" />
-            {/* <div>{results.image}</div> */}
             <div className={classes.content}>
-                <Title className={classes.title}>{results.name}</Title>
+                <Anchor onClick={() => router.back()}>
+                    <BsArrowLeft /> Get back
+                </Anchor>
+                <Title order={1}>{results.name}</Title>
                 <Text c="dimmed" mt="md">
-                    Step into a world where every pair is crafted with a perfect
-                    blend of comfort and style, transforming your daily stride
-                    into a statement
+                    {results.price}
                 </Text>
+                <Text c="dimmed" mt="md">
+                    {results.description}
+                </Text>
+                <Text mt="md">Size</Text>
+                <SegmentedControl data={sizedata} />
 
-                <List
-                    mt={30}
-                    spacing="sm"
-                    size="sm"
-                    icon={
-                        <ThemeIcon size={20} radius="xl">
-                            <BsCheckLg
-                                style={{ width: rem(12), height: rem(12) }}
-                                stroke={1.5}
-                            />
-                        </ThemeIcon>
-                    }>
-                    <List.Item>
-                        <b>Up to 70% Off Payday Great Deals.</b> – build type
-                        Adidas Originals items, Superstar, Stan Smith and many
-                        more!
-                    </List.Item>
-                    <List.Item>
-                        <b>Under 1,000 price items - Up to 40% off</b> – all
-                        Slides, Apparel, accessories, bags, shoe cleaner and
-                        headwear.
-                    </List.Item>
-                </List>
-
+                <Text mt="md">Color</Text>
+                <SegmentedControl data={results.colors} />
+                <Group>
+                    <Button onClick={handlers.decrement} variant="default">
+                        -
+                    </Button>
+                    <Input
+                        placeholder="Input component"
+                        value={count}
+                        onChange={handleInputChange}
+                    />
+                    <Button onClick={handlers.increment} variant="default">
+                        +
+                    </Button>
+                </Group>
                 <Button
-                    radius="xl"
-                    size="md"
-                    className={classes.control}
-                    mt={30}>
-                    Get started
+                    mt={15}
+                    onClick={() => console.log("Add to Cart clicked")}>
+                    Add to Cart
                 </Button>
             </div>
         </div>

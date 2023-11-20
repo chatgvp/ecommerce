@@ -20,6 +20,11 @@ const productList = [
         price: 1000,
         image: image0.src,
         rating: 1,
+        description:
+            "Classic high-top basketball shoes with iconic design.Classic high-top basketball shoes with iconic design.Classic high-top basketball shoes with iconic design.Classic high-top basketball shoes with iconic design.Classic high-top basketball shoes with iconic design.Classic high-top basketball shoes with iconic design.Classic high-top basketball shoes with iconic design.",
+        sizes: [12, 9, 8],
+        colors: ["Red", "Blue", "Green"],
+        quantity: 20,
     },
     {
         id: 2,
@@ -27,6 +32,11 @@ const productList = [
         price: 1200,
         image: image0.src,
         rating: 2,
+        description:
+            "Mid-top sneakers known for their luxury feel and unique styling.",
+        sizes: [11, 10, 9],
+        colors: ["White", "Black", "Grey"],
+        quantity: 15,
     },
     {
         id: 3,
@@ -34,6 +44,11 @@ const productList = [
         price: 800,
         image: image0.src,
         rating: 3,
+        description:
+            "Low-top athletic shoes with a focus on comfort and performance.",
+        sizes: [10, 8, 7],
+        colors: ["Black", "Yellow", "Blue"],
+        quantity: 25,
     },
     {
         id: 4,
@@ -41,6 +56,11 @@ const productList = [
         price: 800,
         image: image0.src,
         rating: 4,
+        description:
+            "Versatile sneakers suitable for both casual and sports occasions.",
+        sizes: [12, 11, 10],
+        colors: ["White", "Red", "Grey"],
+        quantity: 18,
     },
     {
         id: 5,
@@ -48,6 +68,11 @@ const productList = [
         price: 800,
         image: image0.src,
         rating: 5,
+        description:
+            "High-performance athletic shoes with a focus on agility and speed.",
+        sizes: [9, 8, 7],
+        colors: ["Blue", "Black", "Yellow"],
+        quantity: 30,
     },
 ]
 
@@ -59,6 +84,10 @@ const products = productList.map((product, index) => (
         price={product.price}
         image={product.image}
         rating={product.rating}
+        description={product.description}
+        sizes={product.sizes}
+        colors={product.colors}
+        quantity={product.quantity}
     />
 ))
 
@@ -87,7 +116,7 @@ function BodyComponent() {
         <div>
             <h1>Feature Products</h1>
             <Divider />
-            <SimpleGrid cols={3} spacing="xl" verticalSpacing="xl" py={30}>
+            <SimpleGrid cols={3} spacing="xl" verticalSpacing="xl">
                 {products}
             </SimpleGrid>
         </div>

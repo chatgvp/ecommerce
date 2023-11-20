@@ -9,6 +9,10 @@ interface ProductProps {
     price: number
     image: string
     rating: number
+    description: string
+    sizes: number[]
+    colors: string[]
+    quantity: number
 }
 
 const Product: React.FC<ProductProps> = ({
@@ -17,6 +21,10 @@ const Product: React.FC<ProductProps> = ({
     price,
     image,
     rating,
+    description,
+    sizes,
+    colors,
+    quantity,
 }) => {
     const product = {
         id: id,
@@ -24,7 +32,12 @@ const Product: React.FC<ProductProps> = ({
         price: price,
         image: image,
         rating: rating,
+        description: description,
+        sizes: sizes,
+        colors: colors,
+        quantity: quantity,
     }
+
     return (
         <Paper
             withBorder
